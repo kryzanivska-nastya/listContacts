@@ -1,0 +1,77 @@
+<div>
+  <h2>{{ isNew ? "Add" : "Edit" }} Contact</h2>
+  <form [formGroup]="contactForm" (ngSubmit)="saveContact()">
+    <div>
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" formControlName="firstName" />
+      <div
+        *ngIf="
+          contactForm.get('firstName')?.invalid &&
+          contactForm.get('firstName')?.touched
+        "
+      >
+        First Name is required
+      </div>
+    </div>
+    <div>
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" formControlName="lastName" />
+      <div
+        *ngIf="
+          contactForm.get('lastName')?.invalid &&
+          contactForm.get('lastName')?.touched
+        "
+      >
+        Last Name is required
+      </div>
+    </div>
+    <div>
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="text" id="phoneNumber" formControlName="phoneNumber" />
+      <div
+        *ngIf="
+          contactForm.get('phoneNumber')?.invalid &&
+          contactForm.get('phoneNumber')?.touched
+        "
+      >
+        Phone Number is required
+      </div>
+    </div>
+    <div>
+      <label for="dateOfBirth">Date of Birth:</label>
+      <input type="date" id="dateOfBirth" formControlName="dateOfBirth" />
+      <div
+        *ngIf="
+          contactForm.get('dateOfBirth')?.invalid &&
+          contactForm.get('dateOfBirth')?.touched
+        "
+      >
+        Date of Birth is required
+      </div>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" formControlName="email" />
+      <div
+        *ngIf="
+          contactForm.get('email')?.invalid && contactForm.get('email')?.touched
+        "
+      >
+        Invalid Email
+      </div>
+    </div>
+    <div>
+      <label for="address">Address:</label>
+      <textarea id="address" formControlName="address"></textarea>
+      <div
+        *ngIf="
+          contactForm.get('address')?.invalid &&
+          contactForm.get('address')?.touched
+        "
+      >
+        Address is required
+      </div>
+    </div>
+    <button type="submit">{{ isNew ? "Add" : "Save" }}</button>
+  </form>
+</div>

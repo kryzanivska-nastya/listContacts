@@ -5,19 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ContactDetailsComponent } from './contact-details/contact-details.component';
-const routes: Routes = [
-  { path: '', component: AppComponent },
-  { path: 'detail/:id', component: ContactDetailsComponent },
-  // Add routes for add and edit contact components
-];
+import { AddEditContactComponent } from './add-edit-contact/add-edit-contact.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
-  declarations: [AppComponent, ContactDetailsComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    RouterModule.forRoot(routes),
+  declarations: [
+    AppComponent,
+    ContactDetailsComponent,
+    AddEditContactComponent,
   ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
