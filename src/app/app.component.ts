@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from './contact.service';
 import { Contact } from './contact.model';
-import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -22,10 +21,12 @@ export class AppComponent implements OnInit {
   }
 
   searchContacts() {
-    this.filteredContacts = this.contacts.filter((contact) =>
-      `${contact.firstName} ${contact.lastName}`
-        .toLowerCase()
-        .includes(this.searchTerm.toLowerCase())
+    this.filteredContacts = this.contacts.filter(
+      (contact) =>
+        contact.firstName
+          .toLowerCase()
+          .includes(this.searchTerm.toLowerCase()) ||
+        contact.lastName.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 }

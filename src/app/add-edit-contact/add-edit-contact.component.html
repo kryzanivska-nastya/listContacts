@@ -73,5 +73,8 @@
       </div>
     </div>
     <button type="submit">{{ isNew ? "Add" : "Save" }}</button>
+    <button *ngIf="!isNew" type="button" (click)="deleteContact()">
+      Delete
+    </button>
   </form>
 </div>

@@ -11,6 +11,7 @@
       <a [routerLink]="['/detail', contact.id]"
         >{{ contact.firstName }} {{ contact.lastName }}</a
       >
+      <p>{{ contact.phoneNumber }}</p>
     </li>
   </ul>
   <button routerLink="/add">Add Contact</button>

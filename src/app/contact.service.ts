@@ -25,9 +25,14 @@ export class ContactService {
   }
 
   addContact(contact: Contact) {
-    const contacts = this.getContactsFromLocalStorage();
+    let contacts = this.getContactsFromLocalStorage();
+    contact.id = this.generateUniqueId();
     contacts.push(contact);
     this.saveContactsToLocalStorage(contacts);
+  }
+
+  private generateUniqueId(): string {
+    return '_' + Math.random().toString(36).substr(2, 9);
   }
 
   editContact(contact: Contact) {

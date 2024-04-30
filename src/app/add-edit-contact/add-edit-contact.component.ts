@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Contact } from '../contact.model';
 import { ContactService } from '../contact.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -12,12 +11,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddEditContactComponent implements OnInit {
   contactForm!: FormGroup;
   isNew: boolean = true;
-  firstNameInvalid: boolean = false;
-  lastNameInvalid: boolean = false;
-  phoneNumberInvalid: boolean = false;
-  dateOfBirthInvalid: boolean = false;
-  emailInvalid: boolean = false;
-  addressInvalid: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -55,16 +48,33 @@ export class AddEditContactComponent implements OnInit {
 
   saveContact() {
     if (this.contactForm.valid) {
+      const contactData = this.contactForm.value;
       if (this.isNew) {
-        this.contactService.addContact(this.contactForm.value);
+        this.contactService.addContact(contactData);
       } else {
-        this.contactService.editContact(this.contactForm.value);
+        this.contactService.editContact(contactData);
       }
       this.router.navigate(['/']);
     } else {
-      Object.values(this.contactForm.controls).forEach((control) => {
-        control.markAsTouched();
-      });
+      this.markFormGroupTouched(this.contactForm);
     }
+  }
+
+  deleteContact() {
+    if (!this.isNew) {
+      const id = this.contactForm.value.id;
+      this.contactService.deleteContact(id);
+      this.router.navigate(['/']);
+    }
+  }
+
+  markFormGroupTouched(formGroup: FormGroup) {
+    (Object as any).values(formGroup.controls).forEach((control: any) => {
+      control.markAsTouched();
+
+      if (control.controls) {
+        this.markFormGroupTouched(control);
+      }
+    });
   }
 }
